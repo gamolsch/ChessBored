@@ -12,15 +12,9 @@ class SessionsController < ApplicationController
 		redirect_to :profile
 	end
 
-	def login
-		session[:player_id] = Player.authenticate(login_params)
-		puts "*"*50
-		p session[:player_id]
-		if session[:player_id] != nil
-			redirect_to :profile
-		else
-			redirect_to '/'
-		end
+	def signin
+
+
 	end
 
 	private #because of strong params Rails 4

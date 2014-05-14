@@ -3,7 +3,7 @@ RailsSkeleton::Application.routes.draw do
 root to: 'sessions#index' #this is the controller(session) and the action(index) for the root
 
 post '/register' => 'sessions#register'
-post '/login' => 'sessions#login'
+get '/signin' => 'sessions#signin'
 get '/profile' => 'sessions#profile', as: :profile
 
 end
