@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
 	def index
 		@player = Player.new
 	end
@@ -18,6 +19,8 @@ class SessionsController < ApplicationController
 	end
 
 	private #because of strong params Rails 4
+
+
 
 	def register_params
   	params.require(:player).permit(:email)
