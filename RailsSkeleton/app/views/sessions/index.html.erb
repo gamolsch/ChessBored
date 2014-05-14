@@ -1,0 +1,15 @@
+<div class="container">
+	<h1>Register</h1>
+	<%= form_for @user, url: '/register' do |f| %>
+	<%= f.email_field :email %><br>
+	<%= f.password_field :password_hash %><br>
+	<%= f.submit "Submit Form" %>
+	<% end %>
+
+	<h1>Login</h1>
+	<%= form_for @user, url: '/login' do |f| %>
+	<%= f.email_field :email %><br>
+	<%= f.password_field :password_hash %><br>
+	<%= f.submit "Submit Form" %>
+	<% end %>
+</div>
