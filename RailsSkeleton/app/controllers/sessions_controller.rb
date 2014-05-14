@@ -1,22 +1,22 @@
 class SessionsController < ApplicationController
 	def index
-		@user = User.new
+		@player = Player.new
 	end
 
 	def register
-		password = params[:user][:password_hash]
-		user = User.new(register_params)
-		user.password = password
-		user.save!
-		session[:user_id] = user.id
+		password = params[:player][:password_hash]
+		player = Player.new(register_params)
+		player.password = password
+		player.save!
+		session[:player_id] = player.id
 		redirect_to :profile
 	end
 
 	def login
-		session[:user_id] = User.authenticate(login_params)
+		session[:player_id] = Player.authenticate(login_params)
 		puts "*"*50
-		p session[:user_id]
-		if session[:user_id] != nil
+		p session[:player_id]
+		if session[:player_id] != nil
 			redirect_to :profile
 		else
 			redirect_to '/'
@@ -24,12 +24,12 @@ class SessionsController < ApplicationController
 	end
 
 	private #because of strong params Rails 4
-	
+
 	def register_params
-  	params.require(:user).permit(:email)
+  	params.require(:player).permit(:email)
 	end
 
 	def login_params
-		params.require(:user).permit(:email, :password_hash)
+		params.require(:player).permit(:email, :password_hash)
 	end
 end

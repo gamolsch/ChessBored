@@ -1,8 +1,10 @@
-# require 'bcrypt' | rails automatically requires so no require
-class User < ActiveRecord::Base
-  validates :email, uniqueness: :true #only unique emails
+class Player < ActiveRecord::Base
+    belongs_to :group
+    validates :email, uniqueness: :true #only unique emails
+    has_many :playergames
+    has_many :games, through: :playergames
 
-	include BCrypt
+  include BCrypt
 
   def password
     @password ||= Password.new(password_hash)
