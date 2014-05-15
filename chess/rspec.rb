@@ -1,3 +1,5 @@
+
+
 # | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8
 # | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16
 # | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24
@@ -193,6 +195,40 @@ describe Piece do
       knight.location = 50
       expect(knight.get_piece_logic).to eq [33, 35, 44, 60]
     end
+  end
+
+end
+
+describe Piece do
+  let(:pawn) {Piece.new("pawn", nil)}
+
+  context "#valid_moves" do
+    it "Pawn can step one (white)" do
+      pawn.location = 27
+      pawn.first_move = false
+      pawn.color = "white"
+      expect(pawn.get_piece_logic).to eq [35]
+    end
+
+    it "Pawn step two if first move (white)" do
+      pawn.location = 12
+      pawn.color = "white"
+      expect(pawn.get_piece_logic).to eq [20, 28]
+    end
+
+    it "Pawn can step one (black)" do
+      pawn.location = 33
+      pawn.first_move = false
+      pawn.color = "black"
+      expect(pawn.get_piece_logic).to eq [25]
+    end
+
+    it "Pawn step two if first move (black)" do
+      pawn.location = 53
+      pawn.color = "black"
+      expect(pawn.get_piece_logic).to eq [37, 45]
+    end
+
   end
 end
 

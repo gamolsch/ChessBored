@@ -1,23 +1,5 @@
 require 'pry_debug'
 
-# squares = (1..64).to_a
-
-# class BoardSquare
-#   attr_reader :piece, :index
-
-#   def initialize(index)
-#     @piece = nil
-#     @index = index
-#   end
-
-# end
-
-# board = []
-
-# squares.each do | num |
-#   board.push BoardSquare.new(num)
-# end
-
 # | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8
 # | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16
 # | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24
@@ -308,7 +290,26 @@ module Movement
     possibilities
   end
 #--------------------------------------------------------------------------------------------Pawn
+
+  def get_pawn_step
+    possibilities = []
+    pawn_move = 8
+    if self.color == "black"
+      pawn_move = pawn_move * -1
+    end
+    if self.location < 57 && self.location > 8
+      if self.first_move
+        possibilities << self.location + (pawn_move*2)
+      end
+      possibilities << self.location + pawn_move
+    end
+    possibilities
+  end
 end
+
+#THINGS TO DO
+#Add a first_moved position to Piece object
+#Add pawn moving functionality for killing pieces
 
 
 
