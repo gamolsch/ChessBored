@@ -5,8 +5,8 @@ class CreatePieces < ActiveRecord::Migration
       t.string :color
       t.integer :location
       t.string :type
-      t.string :dead
-
+      t.boolean :dead
+      t.boolean :moved
       t.timestamps
     end
   end

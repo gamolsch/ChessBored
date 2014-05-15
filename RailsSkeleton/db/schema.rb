@@ -53,9 +53,11 @@ ActiveRecord::Schema.define(version: 20140514213227) do
   end
 
   create_table "players", force: true do |t|
-    t.string   "email"
-    t.string   "access_token"
-    t.string   "access_secret"
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.string   "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
