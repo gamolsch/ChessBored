@@ -27,22 +27,6 @@ require 'pry_debug'
 # | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56
 # | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64
 
-
-# class Knight
-#   def valid_moves(location_of_knight)
-#     array_of_possible = []
-#     array_of_possible << location_of_knight + 15
-#     array_of_possible << location_of_knight + 17
-#     array_of_possible << location_of_knight - 15
-#     array_of_possible << location_of_knight - 17
-#     array_of_possible << location_of_knight + 6
-#     array_of_possible << location_of_knight - 6
-#     array_of_possible << location_of_knight + 10
-#     array_of_possible << location_of_knight - 10
-#     return array_of_possible #need to a method to handle exceptions
-#   end
-# end
-
 module Movement
 #----------------------------------------------------------------------------------------------Rook, Queen
   def get_horizontal_vertical_slide
@@ -236,9 +220,70 @@ module Movement
     end
     possibilities
   end
+
+#--------------------------------------------------------------------------------------------Knight
+  def get_knight_hop
+    all_possibilities = []
+    all_possibilities << possible_up_two_right_one(self.location)
+    all_possibilities << possible_up_one_right_two(self.location)
+    all_possibilities << possible_down_two_right_one(self.location)
+    all_possibilities << possible_down_one_right_two(self.location)
+    all_possibilities << possible_up_two_left_one(self.location)
+    all_possibilities << possible_up_one_left_two(self.location)
+    all_possibilities << possible_down_two_left_one(self.location)
+    all_possibilities << possible_down_one_left_two(self.location)
+    all_possibilities
+  end
+ #
+  def possible_up_two_right_one(self.location)
+    possibilities = []
+    possibilities << location_of_knight + 17
+    possibilities
+  end
+
+  def possible_up_one_right_two(self.location)
+    possibilities = []
+    possibilities << location_of_knight + 10
+    possibilities
+  end
+
+  def possible_down_two_right_one(self.location)
+    possibilities = []
+    possibilities << location_of_knight - 15
+    possibilities
+  end
+
+  def possible_down_one_right_two(self.location)
+    possibilities = []
+    possibilities << location_of_knight - 6
+    possibilities
+  end
+
+  def possible_up_two_left_one(self.location)
+    possibilities = []
+    possibilities << location_of_knight + 15
+    possibilities
+  end
+
+  def possible_up_one_left_two(self.location)
+    possibilities = []
+    possibilities << location_of_knight + 6
+    possibilities
+  end
+
+  def possible_down_two_left_one(self.location)
+    possibilities = []
+    possibilities << location_of_knight - 17
+    possibilities
+  end
+
+  def possible_down_one_left_two(self.location)
+    possibilities = []
+    possibilities << location_of_knight - 10
+    possibilities
+  end
+
 end
-
-
 
 
 
