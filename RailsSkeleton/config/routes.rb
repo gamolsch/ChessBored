@@ -1,5 +1,5 @@
 RailsSkeleton::Application.routes.draw do
-  get 'game/dashboard'
+
 
   get 'game/game'
 

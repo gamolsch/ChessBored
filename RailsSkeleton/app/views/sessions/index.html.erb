@@ -1,7 +1,13 @@
-<div id="user-widget">
+<div id="user-widget" >
   <% if session[:player_id] %>
+
+  	<ul class="nav">
+    	<li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+    	<li><%= link_to "Play a game", "/game/game"%></li>
+    </ul>
+
     Welcome <strong><%= @player.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+
   <% else %>
     <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
