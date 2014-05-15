@@ -5,7 +5,7 @@ gem 'rspec-rails' #ADDED (testing with respec)
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
-# Use sqlite3 as 
+# Use sqlite3 as
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -31,6 +31,10 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bcrypt'
+
+#for Facebook API
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'

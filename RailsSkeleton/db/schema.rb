@@ -11,11 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512052726) do
+ActiveRecord::Schema.define(version: 20140514213227) do
 
-  create_table "users", force: true do |t|
+  create_table "games", force: true do |t|
+    t.integer  "winner_id"
+    t.datetime "ended_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "moves", force: true do |t|
+    t.integer  "location"
+    t.integer  "pieces_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pieces", force: true do |t|
+    t.integer  "game_id"
+    t.string   "color"
+    t.integer  "location"
+    t.string   "type"
+    t.string   "dead"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "player_games", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
     t.string   "email"
-    t.string   "password_hash"
+    t.string   "access_token"
+    t.string   "access_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
