@@ -1,16 +1,18 @@
 class SessionsController < ApplicationController
 	def index
-
+    if session[:player_id]
+      @player = Player.find(session[:player_id])
+    end
 	end
 
 	def create
-    user = User.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = user.id
-    redirect_to root_url
+    player = Player.from_omniauth(env["omniauth.auth"])
+    session[:player_id] = player.id
+    redirect_to '/game/dashboard'
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:player_id] = nil
     redirect_to root_url
   end
 end

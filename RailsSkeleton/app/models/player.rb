@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
     belongs_to :group
-    validates :email, uniqueness: :true #only unique emails
+
     has_many :playergames
     has_many :games, through: :playergames
 

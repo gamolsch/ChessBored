@@ -1,11 +1,9 @@
 class CreatePlayers < ActiveRecord::Migration
   def change
     create_table :players do |t|
-      t.string :email
-      t.string :access_token
-      t.string :access_secret
-
+      t.string :name, :provider, :uid, :oauth_token, :oauth_expires_at
       t.timestamps
     end
   end
 end
+
