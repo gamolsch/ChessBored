@@ -142,7 +142,57 @@ describe Piece do
       king.location = 57
       expect(king.get_piece_logic).to eq [49, 50, 58]
     end
+  end
+end
 
+describe Piece do
+  let(:knight) {Piece.new("knight", nil)}
+
+  context "#valid_moves" do
+    it "Knight can move correctly" do
+      knight.location = 19
+      expect(knight.get_piece_logic).to eq [2, 4, 9, 13, 25, 29, 34, 36]
+    end
+
+    it "Knight can't go off top of board if at top row" do
+      knight.location = 62
+      expect(knight.get_piece_logic).to eq [45, 47, 52, 56]
+    end
+
+    it "Knight can't go off top of board if at penultimate row" do
+      knight.location = 53
+      expect(knight.get_piece_logic).to eq [36, 38, 43, 47, 59, 63]
+    end
+
+    it "Knight can't go off right side of board at 8th col" do
+      knight.location = 64
+      expect(knight.get_piece_logic).to eq [47, 54]
+    end
+
+    it "Knight can't go off right side of board at 7th col" do
+      knight.location = 55
+      expect(knight.get_piece_logic).to eq [38, 40, 45, 61]
+    end
+
+    it "Knight can't go off top of board if at bottom row" do
+      knight.location = 6
+      expect(knight.get_piece_logic).to eq [12, 16, 21, 23]
+    end
+
+    it "Knight can't go off top of board if at penultimate bottom row" do
+      knight.location = 15
+      expect(knight.get_piece_logic).to eq [5, 21, 30, 32]
+    end
+
+     it "Knight can't go off left side of board at 1st col" do
+      knight.location = 1
+      expect(knight.get_piece_logic).to eq [11, 18]
+    end
+
+    it "Knight can't go off left side of board at 2nd col" do
+      knight.location = 50
+      expect(knight.get_piece_logic).to eq [33, 35, 44, 60]
+    end
   end
 end
 

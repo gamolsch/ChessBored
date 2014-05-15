@@ -224,65 +224,90 @@ module Movement
 #--------------------------------------------------------------------------------------------Knight
   def get_knight_hop
     all_possibilities = []
-    all_possibilities << possible_up_two_right_one(self.location)
-    all_possibilities << possible_up_one_right_two(self.location)
-    all_possibilities << possible_down_two_right_one(self.location)
-    all_possibilities << possible_down_one_right_two(self.location)
-    all_possibilities << possible_up_two_left_one(self.location)
-    all_possibilities << possible_up_one_left_two(self.location)
-    all_possibilities << possible_down_two_left_one(self.location)
-    all_possibilities << possible_down_one_left_two(self.location)
+
+    if self.location < 49 && self.location % 8 != 0
+      all_possibilities << possible_up_two_right_one(self.location)
+    end
+
+    if self.location < 57 && ( (self.location + 1) % 8 != 0 ) && ( self.location % 8 != 0 )
+      all_possibilities << possible_up_one_right_two(self.location)
+    end
+
+    if self.location > 16 && self.location % 8 != 0
+      all_possibilities << possible_down_two_right_one(self.location)
+    end
+
+    if self.location > 8 && ( (self.location + 1) % 8 != 0 ) && ( self.location % 8 != 0 )
+      all_possibilities << possible_down_one_right_two(self.location)
+    end
+
+    if self.location < 49 && (self.location + 7) % 8 != 0
+      all_possibilities << possible_up_two_left_one(self.location)
+    end
+
+    if self.location < 57 && ( (self.location + 7) % 8 != 0 ) && ( (self.location + 6) % 8 != 0 )
+      all_possibilities << possible_up_one_left_two(self.location)
+    end
+
+    if self.location > 16 && (self.location + 7) % 8 != 0
+      all_possibilities << possible_down_two_left_one(self.location)
+    end
+
+    if self.location > 8 && ( (self.location + 7) % 8 != 0 ) && ( (self.location + 6) % 8 != 0 )
+      all_possibilities << possible_down_one_left_two(self.location)
+    end
+
     all_possibilities
   end
  #
-  def possible_up_two_right_one(self.location)
+  def possible_up_two_right_one(location)
     possibilities = []
-    possibilities << location_of_knight + 17
+    possibilities << location + 17
     possibilities
   end
 
-  def possible_up_one_right_two(self.location)
+  def possible_up_one_right_two(location)
     possibilities = []
-    possibilities << location_of_knight + 10
+    possibilities << location + 10
     possibilities
   end
 
-  def possible_down_two_right_one(self.location)
+  def possible_down_two_right_one(location)
     possibilities = []
-    possibilities << location_of_knight - 15
+    possibilities << location - 15
     possibilities
   end
 
-  def possible_down_one_right_two(self.location)
+  def possible_down_one_right_two(location)
     possibilities = []
-    possibilities << location_of_knight - 6
+    possibilities << location - 6
     possibilities
   end
 
-  def possible_up_two_left_one(self.location)
+  def possible_up_two_left_one(location)
     possibilities = []
-    possibilities << location_of_knight + 15
+    possibilities << location + 15
     possibilities
   end
 
-  def possible_up_one_left_two(self.location)
+  def possible_up_one_left_two(location)
     possibilities = []
-    possibilities << location_of_knight + 6
+    possibilities << location + 6
     possibilities
   end
 
-  def possible_down_two_left_one(self.location)
+  def possible_down_two_left_one(location)
     possibilities = []
-    possibilities << location_of_knight - 17
+    possibilities << location - 17
     possibilities
   end
 
-  def possible_down_one_left_two(self.location)
+  def possible_down_one_left_two(location)
     possibilities = []
-    possibilities << location_of_knight - 10
+    possibilities << location - 10
     possibilities
   end
-
+#--------------------------------------------------------------------------------------------Pawn
 end
 
 

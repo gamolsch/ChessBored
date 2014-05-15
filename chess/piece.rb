@@ -22,6 +22,9 @@ class Piece
     if self.type == "king"
       all_location_possiblities << get_king_step
     end
+    if self.type == "knight"
+      all_location_possiblities << get_knight_hop
+    end
     all_location_possiblities.flatten!.sort
   end
 
