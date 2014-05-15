@@ -33,7 +33,8 @@ gem 'spring',        group: :development
 gem 'bcrypt'
 
 #for Facebook API
-gem 'omniauth-facebook'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
