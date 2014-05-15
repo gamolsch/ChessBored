@@ -39,36 +39,112 @@ class Knight
   end
 end
 
-class Rook
-  def valid_moves(location) #all passing
-    array_of_possible = []
+module Movement
 
+  def get_horizontal_vertical_slide
+    all_possibilities = []
+    all_possibilities << possible_up(self.location)
+    all_possibilities << possible_down(self.location)
+    all_possibilities << possible_right(self.location)
+    all_possibilities << possible_left(self.location)
+    all_possibilities
+  end
+
+  def get_diagonal_slide
+    all_possibilities = []
+    all_possibilities << possible_up(self.location)
+    all_possibilities << possible_down(self.location)
+    all_possibilities << possible_right(self.location)
+    all_possibilities << possible_left(self.location)
+    all_possibilities
+  end
+
+  def possible_up(location)
+    possibilities = []
     possible_up = location
     while (possible_up <= 64)
       possible_up += 8
-      array_of_possible << possible_up if possible_up <= 64
+      possibilities << possible_up if possible_up <= 64
     end
+    possibilities
+  end
 
+  def possible_down(location)
+    possibilities = []
     possible_down = location
     while (possible_down >= 1)
       possible_down -= 8
-      array_of_possible << possible_down if possible_down >= 1
+      possibilities << possible_down if possible_down >= 1
     end
+    possibilities
+  end
 
+  def possible_right(location)
+    possibilities = []
     possible_right = location
     while  ( (possible_right % 8 != 0) && (possible_right <= 64) )
       possible_right += 1
-      array_of_possible << possible_right if possible_right <= 64
+      possibilities << possible_right if possible_right <= 64
     end
+    possibilities
+  end
 
+  def possible_left(location)
+    possibilities = []
     possible_left = location
     while  ( ( (possible_left + 7) % 8 != 0) && (possible_left >= 1) )
       possible_left -= 1
-      array_of_possible << possible_left if possible_left >= 1
+      possibilities << possible_left if possible_left >= 1
     end
-
-    array_of_possible.sort
+    possibilities
   end
+
+end
+
+#when we put this in our Piece Model...
+#"valid_moves" will
+
+class Rook
+  include Movement
+
+  def valid_moves(location)
+    array_of_possible = []
+    array_of_possible << Movement.possible_up(location)
+    array_of_possible << Movement.possible_down(location)
+    array_of_possible << Movement.possible_left(location)
+    array_of_possible << Movement.possible_right(location)
+    array_of_possible.flatten!.sort!
+    # return array_of_possible
+  end
+  # def valid_moves(location) #all passing
+
+  #   array_of_possible = []
+  #   possible_up = location
+  #   while (possible_up <= 64)
+  #     possible_up += 8
+  #     array_of_possible << possible_up if possible_up <= 64
+  #   end
+
+  #   possible_down = location
+  #   while (possible_down >= 1)
+  #     possible_down -= 8
+  #     array_of_possible << possible_down if possible_down >= 1
+  #   end
+
+  #   possible_right = location
+  #   while  ( (possible_right % 8 != 0) && (possible_right <= 64) )
+  #     possible_right += 1
+  #     array_of_possible << possible_right if possible_right <= 64
+  #   end
+
+  #   possible_left = location
+  #   while  ( ( (possible_left + 7) % 8 != 0) && (possible_left >= 1) )
+  #     possible_left -= 1
+  #     array_of_possible << possible_left if possible_left >= 1
+  #   end
+
+  #   array_of_possible.sort
+  # end
 end
 
 class Bishop
