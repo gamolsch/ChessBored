@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 20140514213227) do
     t.integer  "game_id"
     t.string   "color"
     t.integer  "location"
-    t.string   "type"
-    t.string   "dead"
+    t.string   "piece_type"
+    t.boolean  "dead"
+    t.boolean  "moved"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
