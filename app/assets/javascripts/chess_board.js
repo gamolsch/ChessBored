@@ -91,6 +91,11 @@ function drawBoard(board){
   $('#board').append(str);
 };
 
+
+
+
+
+
 $(function(){
   
   var squareSelector = '#18'
@@ -99,7 +104,41 @@ $(function(){
   $(".piece").draggable({
   revert: true,
   
-  start: function( event, ui ) {
+  start: function(e, ui) {
+    var current_piece = ui.helper[0]
+    console.log(parse_piece_information(current_piece));
+    // class_array = current_piece.className.split(" ")[1];
+    // var piece_id = current_piece.parentNode.id;
+    // var piece_info = class_array.match(/(.*)(_)(.*)/);
+    // var piece_color = (piece_info[1]).toLowerCase();
+    // var piece_type = (piece_info[3]).toLowerCase();
+    
+    // console.log(piece_id);
+    // console.log(piece_color);
+    // console.log(piece_type);
+
+
+function parse_piece_information(current_piece){
+    class_array = current_piece.className.split(" ")[1];
+    var piece_id = current_piece.parentNode.id;
+    var piece_info = class_array.match(/(.*)(_)(.*)/);
+    var piece_color = (piece_info[1]).toLowerCase();
+    var piece_type = (piece_info[3]).toLowerCase();
+    return {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
+}
+
+
+      $.ajax({
+        type: "POST",
+        url: "/get_piece_info",
+        data: parse_piece_information,
+        complete: {},
+        success: function(response){
+          console.log("am i even here?");
+        }
+      })
+
+
     $(squareSelector).droppable({
       //send back the location (parent div id) and piece type 
       //get possibilties from ajax
