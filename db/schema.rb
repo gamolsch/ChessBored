@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140514213227) do
     t.integer  "location"
     t.string   "piece_type"
     t.boolean  "is_dead"
-    t.boolean  "is_first_move"
+    t.boolean  "is_first_move", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

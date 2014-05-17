@@ -5,6 +5,7 @@ html {
     letter-spacing: 3px;
 }
 
+
 #board {
     margin: 0px auto;
     height: 400px;
@@ -80,4 +81,7 @@ html {
 
 #board .column .EMPTY {
     background: none;
+}
+.column.possibleLocations{
+    background-color: yellow !important;
 }
