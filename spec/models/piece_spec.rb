@@ -188,29 +188,31 @@ describe Piece do
 
   context "#valid_moves" do
     it "Pawn can step one (white)" do
-      pawn.location = 27
-      pawn.is_first_move = false
-      pawn.color = "white"
-      expect(pawn.get_piece_logic).to eq [35]
-    end
-
-    it "Pawn step two if first move (white)" do
-      pawn.location = 12
-      pawn.color = "white"
-      expect(pawn.get_piece_logic).to eq [20, 28]
-    end
-
-    it "Pawn can step one (black)" do
       pawn.location = 33
       pawn.is_first_move = false
-      pawn.color = "black"
+      pawn.color = "white"
       expect(pawn.get_piece_logic).to eq [25]
     end
 
-    it "Pawn step two if first move (black)" do
+    it "Pawn step two if first move (white)" do
       pawn.location = 53
-      pawn.color = "black"
+      pawn.color = "white"
+      pawn.is_first_move = true
       expect(pawn.get_piece_logic).to eq [37, 45]
+    end
+
+    it "Pawn can step one (black)" do
+      pawn.location = 27
+      pawn.is_first_move = false
+      pawn.color = "black"
+      expect(pawn.get_piece_logic).to eq [35]
+    end
+
+    it "Pawn step two if first move (black)" do
+      pawn.location = 12
+      pawn.is_first_move = true
+      pawn.color = "black"
+      expect(pawn.get_piece_logic).to eq [20, 28]
     end
 
   end
