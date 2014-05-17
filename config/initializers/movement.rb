@@ -294,11 +294,11 @@ module Movement
   def get_pawn_step
     possibilities = []
     pawn_move = 8
-    if self.color == "black"
+    if self.color == "white"
       pawn_move = pawn_move * -1
     end
     if self.location < 57 && self.location > 8
-      if self.first_move
+      if self.is_first_move
         possibilities << self.location + (pawn_move*2)
       end
       possibilities << self.location + pawn_move

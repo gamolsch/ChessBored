@@ -7,9 +7,9 @@ class GameController < ApplicationController
 
   def get_piece_info
   	puts "THESE ARE PIECE PARAMS"
-    piece = Piece.new(color: params[:piece_color], location: params[:piece_location], piece_type: params[:piece_type])
-  	p params
-  	return "hello?" 
+    piece = Piece.new(color: params[:piece_color], location: params[:piece_location], piece_type: params[:piece_type], is_dead: false, is_first_move: false)
+    moves = piece.get_piece_logic
+    render :json => [moves]
   end
 
 end

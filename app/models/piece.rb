@@ -21,7 +21,7 @@ def get_piece_logic
     if self.piece_type == "pawn"
       all_location_possiblities << get_pawn_step
     end
-    self.moved = false
+    self.is_first_move = false
     all_location_possiblities.flatten!.sort
   end
 
