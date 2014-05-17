@@ -67,7 +67,7 @@ function getsquareName(squareValue){
             break;
     }
 }
-
+var activeplayer = "white"
 
 $(function(){
   drawBoard(board)
@@ -96,12 +96,15 @@ function drawBoard(board){
 
 
 
-$(function(){
+$(function gameLogic(){
   
   var squareSelector = '#18'
   var originalColor = $(squareSelector).css('background-color');
-
-  $(".piece").draggable({
+  $('[class*=" BLACK"]').draggable({
+    revert:true,
+  })
+  $('[class*=" BLACK"]').draggable( 'disable' )
+  $('[class*=" WHITE"]').draggable({
   revert: true,
   
   start: function(e, ui) {
@@ -124,7 +127,9 @@ function parse_piece_information(current_piece){
     var piece_info = class_array.match(/(.*)(_)(.*)/);
     var piece_color = (piece_info[1]).toLowerCase();
     var piece_type = (piece_info[3]).toLowerCase();
-    return {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
+    var info = {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
+    return info
+    // return {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
 }
 
 
@@ -150,10 +155,24 @@ function parse_piece_information(current_piece){
         //determine possibilities (and check to see if king is one of them - if so, that is a check)
           //if king check = king is only active piece on next turn 
             //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
+
       var $piece = ui.draggable
       $piece.appendTo($(squareSelector))
-    },
 
+      switch (activeplayer){
+        case "white":
+            activeplayer = "black"
+            $('[class*=" WHITE"]').draggable( 'disable' )
+            $('[class*=" BLACK"]').draggable( 'enable' )
+          break;
+        case "black":
+            activeplayer = "white"
+            $('[class*=" WHITE"]').draggable( 'enable' )
+            $('[class*=" BLACK"]').draggable( 'disable' )
+          break;
+      }
+    },
+ 
 //NOTES
 //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
 //
