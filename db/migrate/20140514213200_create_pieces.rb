@@ -6,7 +6,7 @@ class CreatePieces < ActiveRecord::Migration
       t.integer :location
       t.string :piece_type
       t.boolean :is_dead
-      t.boolean :is_first_move
+      t.boolean :is_first_move, default: :true
       t.timestamps
     end
   end

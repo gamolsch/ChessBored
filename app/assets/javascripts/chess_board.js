@@ -69,10 +69,13 @@ function getsquareName(squareValue){
     }
 }
 
+var activeplayer = "white"
 
 
 
-function drawBoard(){
+
+function drawBoard(board){
+
     var num = 1;
     var str = '';
     //building rows
@@ -95,12 +98,15 @@ function drawBoard(){
 
 
 
-$(function(){
+$(function gameLogic(){
   
   var squareSelector = '#18'
   var originalColor = $(squareSelector).css('background-color');
-
-  $(".piece").draggable({
+  $('[class*=" BLACK"]').draggable({
+    revert:true,
+  })
+  $('[class*=" BLACK"]').draggable( 'disable' )
+  $('[class*=" WHITE"]').draggable({
   revert: true,
   
   start: function(e, ui) {
@@ -123,17 +129,25 @@ function parse_piece_information(current_piece){
     var piece_info = class_array.match(/(.*)(_)(.*)/);
     var piece_color = (piece_info[1]).toLowerCase();
     var piece_type = (piece_info[3]).toLowerCase();
+    var info = {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
+    return info
+    // return {piece_id: piece_id, piece_color: piece_color, piece_type: piece_type}
+
     return {piece_location: piece_location, piece_color: piece_color, piece_type: piece_type}
+
 }
 
+$(function(){
+  drawBoard(board)
+})
 
       $.ajax({
         type: "POST",
         url: "/get_piece_info",
-        data: parse_piece_information(current_piece),
+        data: parse_piece_information,
         complete: {},
         success: function(response){
-          console.log(response);
+          console.log("am i even here?");
         }
       })
 
@@ -149,20 +163,73 @@ function parse_piece_information(current_piece){
         //determine possibilities (and check to see if king is one of them - if so, that is a check)
           //if king check = king is only active piece on next turn 
             //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
+
       var $piece = ui.draggable
       $piece.appendTo($(squareSelector))
-    },
 
+      switch (activeplayer){
+        case "white":
+            activeplayer = "black"
+            $('[class*=" WHITE"]').draggable( 'disable' )
+            $('[class*=" BLACK"]').draggable( 'enable' )
+          break;
+        case "black":
+            activeplayer = "white"
+            $('[class*=" WHITE"]').draggable( 'enable' )
+            $('[class*=" BLACK"]').draggable( 'disable' )
+          break;
+      }
+    },
+ 
 //NOTES
 //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
 //
 
-    deactivate: function( event, ui ) {
-      $(squareSelector).css('background-color', originalColor)
+$(function(){ //"document ready"
+
+  $('.column').droppable({
+    disabled: true,
+    drop: function( event, ui) {
+    //switch colors function (also make function that initiates white as active) COMPLETE!
+    //conditional logic determining whether a piece dies (if so send and store piece information, remove piece png from dom)
+    //determine possibilities (and check to see if king is one of them - if so, that is a check)
+    //if king check = king is only active piece on next turn 
+    //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
+    var $piece = ui.draggable
+    $piece.appendTo($(this));
+  }
+}),
+
+  $(".piece").draggable({
+    revert: true,
+    start: function(e, ui) {
+      var current_piece = ui.helper[0];  
     }
-    }).css("background-color", "yellow")
-  },
+  });
+  
+  $(".piece").mouseover(function(){
+    $.ajax({
+      type: "POST",
+      url: "/get_piece_info",
+      data: parse_piece_information($(this)[0]),
+      complete: {},
+      success: function(response){
+        var array_possible_divs = []
+        var array = response[0]
+        for(var i = 0; i < array.length; i++){
+          console.log(array[i]);
+          $("#" + array[i]).addClass("possibleLocations");
+          array_possible_divs.push($("#" + array[i]));
+          $("#" + array[i]).droppable("enable"); 
+        }
+      }
+    })
+  })  
+  //NOTES
+  //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
+  $('.EMPTY').remove();
 });
+
 
 $('.EMPTY').remove();
 
@@ -174,3 +241,4 @@ var ready = function() {
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
