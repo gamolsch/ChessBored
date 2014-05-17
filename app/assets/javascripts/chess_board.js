@@ -86,8 +86,6 @@ function drawBoard(board){
   $('#board').append(str);
 };
 
-
-
 function parse_piece_information(current_piece){
     class_array = current_piece.className.split(" ")[1];
     var piece_location = current_piece.parentNode.id;
@@ -97,21 +95,34 @@ function parse_piece_information(current_piece){
     return {piece_location: piece_location, piece_color: piece_color, piece_type: piece_type}
 }
 
-
-
 $(function(){
   drawBoard(board)
 })
 
-
 $(function(){ //"document ready"
-  // console.log($(".piece"));
 
+  $('.column').droppable({
+    disabled: true,
+    drop: function( event, ui) {
+    //switch colors function (also make function that initiates white as active) COMPLETE!
+    //conditional logic determining whether a piece dies (if so send and store piece information, remove piece png from dom)
+    //determine possibilities (and check to see if king is one of them - if so, that is a check)
+    //if king check = king is only active piece on next turn 
+    //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
+    var $piece = ui.draggable
+    $piece.appendTo($(this));
+  }
+}),
+
+  $(".piece").draggable({
+    revert: true,
+    start: function(e, ui) {
+      var current_piece = ui.helper[0];  
+    }
+  });
+  
   $(".piece").mouseover(function(){
-    console.log("clicks!");
-    console.log($(this)[0]);
-
-        $.ajax({
+    $.ajax({
       type: "POST",
       url: "/get_piece_info",
       data: parse_piece_information($(this)[0]),
@@ -125,89 +136,10 @@ $(function(){ //"document ready"
           array_possible_divs.push($("#" + array[i]));
           $("#" + array[i]).droppable("enable"); 
         }
-        // $("possibleLocations").css("background-color", "yellow");
       }
-
-//NOTES
-//javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
-//
     })
-
-  });
-  
-  $('.column').droppable({
-    disabled: true,
-    drop: function( event, ui) {
-    console.log("INSIDE DROP FUNCTION");
-  //switch colors function (also make function that initiates white as active)
-  //conditional logic determining whether a piece dies (if so send and store piece information, remove piece png from dom)
-  //determine possibilities (and check to see if king is one of them - if so, that is a check)
-    //if king check = king is only active piece on next turn 
-      //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
-    var $piece = ui.draggable
-    $piece.appendTo($(this));
-  }
-})
-  // var squareSelector = '#18'
-  // var originalColor = $(squareSelector).css('background-color');
-
-  $(".piece").draggable({
-  revert: true,
-  
-  start: function(e, ui) {
-    var current_piece = ui.helper[0]
-    // console.log(parse_piece_information(current_piece));
-    
-
-//     $.ajax({
-//       type: "POST",
-//       url: "/get_piece_info",
-//       data: parse_piece_information(current_piece),
-//       complete: {},
-//       success: function(response){
-//         var array_possible_divs = []
-//         var array = response[0]
-//         for(var i = 0; i < array.length; i++){
-//           console.log(array[i]);
-//           $("#" + array[i]).addClass("possibleLocations");
-//           array_possible_divs.push($("#" + array[i]));
-//           $("#" + array[i]).droppable("enable"); 
-//         }
-//         // $("possibleLocations").css("background-color", "yellow");
-//       }
-
-// //NOTES
-// //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
-// //
-//     })
-
-
-    //     $(".possibleLocations").droppable({
-    //       //send back the location (parent div id) and piece type 
-    //       //get possibilties from ajax
-    //       //determine possibilities based on other pieces
-    //       //color possibilities
-    //       drop: function( event, ui) {
-    //         console.log("INSIDE DROP FUNCTION");
-    //         //switch colors function (also make function that initiates white as active)
-    //         //conditional logic determining whether a piece dies (if so send and store piece information, remove piece png from dom)
-    //         //determine possibilities (and check to see if king is one of them - if so, that is a check)
-    //           //if king check = king is only active piece on next turn 
-    //             //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
-    //         var $piece = ui.draggable
-    //         $piece.appendTo($(this));
-    //     }
-    // })
-
-    // deactivate: function( event, ui ) {
-    //   $(squareSelector).css('background-color', originalColor)
-    // }
-  }
-
-
+  })  
+  //NOTES
+  //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
+  $('.EMPTY').remove();
 });
-
-
-$('.EMPTY').remove();
-
-})
