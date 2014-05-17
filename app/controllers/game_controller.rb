@@ -1,9 +1,15 @@
 class GameController < ApplicationController
-  def game
-    #unless session[:player_id]
+  def index
+    unless session[:player_id]
       redirect_to root_url
-    #end
+    end
+    render :game
   end
+
+  def game
+    render :game
+  end
+
 
   def get_piece_info
   	puts "THESE ARE PIECE PARAMS"

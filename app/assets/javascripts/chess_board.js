@@ -1,3 +1,4 @@
+
 var WHITE_KING = 100;
 var WHITE_QUEEN = 90;
 var WHITE_ROOK = 50;
@@ -69,11 +70,9 @@ function getsquareName(squareValue){
 }
 
 
-$(function(){
-  drawBoard(board)
-})
 
-function drawBoard(board){
+
+function drawBoard(){
     var num = 1;
     var str = '';
     //building rows
@@ -82,7 +81,7 @@ function drawBoard(board){
     //building columns
     for( var j = 0 ; j < 8 ; j++ ){
       str += '<div id=' + num++ + ' class="column ' +
-      ( (i + j) % 2 === 0 ? 'light': 'dark') + '">' +
+      ( (i + j) % 2 === 0 ? 'light': ' dark') + '">' +
       '<div class="piece ' + getsquareName(board[i][j]) + '"></div>' +
       '</div>';
     }
@@ -168,3 +167,10 @@ function parse_piece_information(current_piece){
 $('.EMPTY').remove();
 
 })
+//Fixes Turbocrap issue
+var ready = function() {
+    drawBoard();
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
