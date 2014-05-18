@@ -21,6 +21,7 @@ body {
     border: 1px solid black;
     float: left;
     margin-top: 50px;
+    background-color: #bfb630;
 }
 
 #black-dead{
@@ -29,6 +30,7 @@ body {
     border: 1px solid black;
     float: right;
     margin-top: 50px;
+    background-color: #bfb630;
 }
 
 #white_dead div{
