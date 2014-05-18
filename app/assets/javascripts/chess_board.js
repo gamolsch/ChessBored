@@ -127,8 +127,7 @@ $(function(){ //"document ready"
     console.log("THIS IS WHAT WE ARE APPENDING TO");
     console.log($(this));
     $piece.appendTo($(this));
-
-     switch (activeplayer){
+    switch (activeplayer){
       case "white":
         activeplayer = "black"
         $('[class*=" WHITE"]').draggable( 'disable' )
@@ -146,7 +145,6 @@ $(function(){ //"document ready"
   }
 }),
 
-  
   $(".piece").mouseover(function(){
     $.ajax({
       type: "POST",
@@ -154,40 +152,20 @@ $(function(){ //"document ready"
       data: parse_piece_information($(this)[0]),
       complete: {},
       success: function(response){
-        // console.log(".piece");
-        // console.log("this is active player");
-        // console.log(activeplayer); //we are able to get the active player
         var array_possible_divs = []
         var array = response[0]
         for(var i = 0; i < array.length; i++){
-          // console.log("this is containing div");
-          // console.log($("#" + array[i]));
-          // console.log("this should be the piece within the div");          
-          // console.log(($("#" + array[i])).find('div'));
-          // var the_piece_in_div = $("#" + array[i]).find('div')
-          // var piece_class_names = the_piece_in_div.attr("class");
-          // if (piece_class_names != undefined){
-          //   var piece_name = piece_class_names.split(" ")[1];
-          //   // console.log("should return boolean");
-          //   if (piece_name.match(/BLACK_.*/)){
-          //     console.log("MATCHES BLACK PIECES"); 
-          //   }
-          // }
           if (activeplayer === "white"){
             console.log(activeplayer);
-            // console.log("active player is white");
             var the_piece_in_div = $("#" + array[i]).find('div')
             var piece_class_names = the_piece_in_div.attr("class");  
             if (piece_class_names != undefined){
               var piece_name = piece_class_names.split(" ")[1];
-            // console.log("should return boolean");
               if (piece_name.match(/BLACK_.*/)){
-                // console.log("MATCHES BLACK PIECES");
                 $("#" + array[i]).addClass("possibleLocations"); 
                 $("#" + array[i]).droppable("enable"); 
               }
             }
-            
           }
           if (activeplayer === "black"){
             console.log(activeplayer);
@@ -195,9 +173,7 @@ $(function(){ //"document ready"
             var piece_class_names = the_piece_in_div.attr("class");
             if (piece_class_names != undefined){
               var piece_name = piece_class_names.split(" ")[1];
-            // console.log("should return boolean");
               if (piece_name.match(/WHITE_.*/)){
-                // console.log("MATCHES WHITE PIECES");
                 $("#" + array[i]).addClass("possibleLocations"); 
                 $("#" + array[i]).droppable("enable"); 
               }
@@ -212,11 +188,9 @@ $(function(){ //"document ready"
       }
     })
   })
-
   $(".piece").mouseout(function(){
     $(".column").removeClass("possibleLocations");
     $(".column").droppable("disable");
-
   })  
   //NOTES
   //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
