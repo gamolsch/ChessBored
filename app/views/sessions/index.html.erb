@@ -1,13 +1,16 @@
 <div id="user-widget" >
-  <% #if session[:player_id] %> 
+  <% if session[:player_id] %> 
 
   	<ul class="nav">
+  		<%= form_tag("/game", method: "post") do %>
+  <%= submit_tag("New Game") %>
+<% end %>
       <li><%= link_to "Go to Game", "/game", id: "game" %></li>
     </ul>
 
-    Welcome <strong><%=# @player.name %></strong>!
+    Welcome <strong><%= @player.name %></strong>!
 
-  <% #else %>
-    <%= #link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% #end %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
 </div>

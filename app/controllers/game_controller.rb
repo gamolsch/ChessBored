@@ -1,8 +1,18 @@
 class GameController < ApplicationController
+  
   def game
-    #unless session[:player_id]
-      redirect_to root_url
-    #end
+    if session[:game_id]
+      GameHelper.load(session[:game_id])
+    else
+      @game = Game.create()
+      PlayerGame.create(player_id: session[:player_id], game_id: @game.id) 
+      render :game
+    end
+  end
+
+  def game_id
+    session[:game_id] = params[:id]
+    redirect_to :game
   end
 
   def get_piece_info
