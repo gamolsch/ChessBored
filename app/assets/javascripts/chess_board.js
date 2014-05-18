@@ -68,6 +68,9 @@ function getsquareName(squareValue){
     }
 }
 
+var activeplayer = "white"
+
+
 function drawBoard(board){
     var num = 1;
     var str = '';
@@ -111,6 +114,18 @@ $(function(){ //"document ready"
     //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
     var $piece = ui.draggable
     $piece.appendTo($(this));
+     switch (activeplayer){
+        case "white":
+            activeplayer = "black"
+            $('[class*=" WHITE"]').draggable( 'disable' )
+            $('[class*=" BLACK"]').draggable( 'enable' )
+          break;
+        case "black":
+            activeplayer = "white"
+            $('[class*=" WHITE"]').draggable( 'enable' )
+            $('[class*=" BLACK"]').draggable( 'disable' )
+          break;
+      }
   }
 }),
 
