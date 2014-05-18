@@ -71,6 +71,7 @@ function getsquareName(squareValue){
 var activeplayer = "white"
 
 
+
 function drawBoard(board){
     var num = 1;
     var str = '';
@@ -104,6 +105,15 @@ $(function(){
 
 $(function(){ //"document ready"
 
+  $(".piece").draggable({
+    revert: true,
+    start: function(e, ui) {
+      var current_piece = ui.helper[0];  
+    }
+  });
+
+  $('[class*=" BLACK"]').draggable( 'disable' )
+
   $('.column').droppable({
     disabled: true,
     drop: function( event, ui) {
@@ -115,26 +125,23 @@ $(function(){ //"document ready"
     var $piece = ui.draggable
     $piece.appendTo($(this));
      switch (activeplayer){
-        case "white":
-            activeplayer = "black"
-            $('[class*=" WHITE"]').draggable( 'disable' )
-            $('[class*=" BLACK"]').draggable( 'enable' )
-          break;
-        case "black":
-            activeplayer = "white"
-            $('[class*=" WHITE"]').draggable( 'enable' )
-            $('[class*=" BLACK"]').draggable( 'disable' )
-          break;
-      }
+      case "white":
+        activeplayer = "black"
+        $('[class*=" WHITE"]').draggable( 'disable' )
+        $('[class*=" BLACK"]').draggable( 'enable' )
+        break;
+      case "black":
+        activeplayer = "white"
+        $('[class*=" WHITE"]').draggable( 'enable' )
+        $('[class*=" BLACK"]').draggable( 'disable' )
+        break;
+    }
+
+    $(".column").removeClass("possibleLocations");
+    $(".column").droppable("disable");
   }
 }),
 
-  $(".piece").draggable({
-    revert: true,
-    start: function(e, ui) {
-      var current_piece = ui.helper[0];  
-    }
-  });
   
   $(".piece").mouseover(function(){
     $.ajax({
@@ -153,8 +160,19 @@ $(function(){ //"document ready"
         }
       }
     })
+  })
+
+  $(".piece").mouseout(function(){
+    $(".column").removeClass("possibleLocations");
+    $(".column").droppable("disable");
+
   })  
   //NOTES
   //javascript objects in arrays (black and white) iterate (piece type, location, color, first_move, dead)
   $('.EMPTY').remove();
 });
+
+
+//TO DO 
+//don't move black first
+//make switch statment fire only when a piee is placed = not only when it is dropped
