@@ -6,20 +6,29 @@ html {
     margin: 0px;
 }
 
-/*body{
+body {
+   margin: 0;
+   padding: 0;
+}
+
+.wrapper {
     width: 100%;
-}*/
+}
 
 #white-dead{
     height: 400px;
     width: 200px;
     border: 1px solid black;
+    float: left;
+    margin-top: 50px;
 }
 
 #black-dead{
     height: 400px;
     width: 200px;
     border: 1px solid black;
+    float: right;
+    margin-top: 50px;
 }
 
 #white_dead div{
@@ -35,9 +44,11 @@ html {
 
 
 #board {
-    margin: 0px auto;
+    margin-left: 550px;
     height: 400px;
     width: 400px;
+    display: inline-block;
+    position: absolute;
     /*box-shadow: 3px 0px 1px 1px #373442;*/
 }
 
