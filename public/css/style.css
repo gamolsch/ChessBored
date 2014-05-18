@@ -1,16 +1,101 @@
 html {
-    background: #4B475A;
-    color: #817999;
-    font-family: 'Open Sans', sans-serif;
-    letter-spacing: 3px;
+
+    padding-top: 75px;
+    background: #989898;
+    /*color: #817999;*/
+    color: black;
+    /*font-size: 200%;*/
+    text-align: center;
+    letter-spacing: 4px;
 }
 
+#title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 50px;
+    text-align: left;
+}
+
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+}
+
+img {
+    padding-top: 25px;
+}
+
+/*#topnav {
+  float: right;
+  height: 90px;
+  background-color: #404040;
+  position: fixed;
+  top:0;
+  width: 100%;
+  display: block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 25px;
+  
+}*/
+
+#topnav {
+  height: 70px;
+  background-color: #787878;
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+#brand {
+  float: left;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 32px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#brand:hover {
+  color:tomato;
+}
+
+#logout {
+  float: right;
+  height: 50px;
+  padding-right: 20px;
+  padding-top: 0px;
+  font-size: 25px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#logout a {
+  color: white;
+  text-decoration: none;
+  line-height: 50px;
+}
+
+#logout a:hover {
+  color: tomato;
+}
+
+ul {
+  list-style-type: none
+}
+
+li {
+  display: center;
+  margin-right: 20px;
+  float: right;
+ color: white;
+}
 
 #board {
     margin: 0px auto;
     height: 400px;
     width: 400px;
-    /*box-shadow: 3px 0px 1px 1px #373442;*/
+    
 }
 
 #board .column {
@@ -19,6 +104,7 @@ html {
     background: #A198C0;
     float: left;
     font-size: 45px;
+
 }
 
 #board .column.dark {

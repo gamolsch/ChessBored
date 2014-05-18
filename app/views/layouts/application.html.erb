@@ -7,13 +7,24 @@
   <%= csrf_meta_tags %>
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="css/zocial.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 
 
 </head>
 <body>
+
+	<div id="topnav">
+    <div id="brand">ChessBored</div>
+    <% #if current_user %>
+
+      <div id="logout"><a href=#>Logout</a></div>
+    <% #end %>
+  </div>
+
+<br>
 
 <%= yield %>
 
