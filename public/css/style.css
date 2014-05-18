@@ -3,7 +3,35 @@ html {
     color: #817999;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 3px;
+    margin: 0px;
 }
+
+/*body{
+    width: 100%;
+}*/
+
+#white-dead{
+    height: 400px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+#black-dead{
+    height: 400px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+#white_dead div{
+    width: 50px;
+    height: 50px;
+}
+
+#black_dead div{
+    width: 50px;
+    height: 50px;
+}
+
 
 
 #board {
@@ -30,54 +58,55 @@ html {
     width: 50px;
 }
 
-#board .column .WHITE_KING {
+.WHITE_KING {
     background: url('../images/wKing.png');
 }
 
-#board .column .WHITE_QUEEN {
+.WHITE_QUEEN {
     background: url('../images/wQueen.png');
 }
 
-#board .column .WHITE_ROOK {
+.WHITE_ROOK {
     background: url('../images/wRook.png');
 }
 
-#board .column .WHITE_BISHOP {
+.WHITE_BISHOP {
     background: url('../images/wBishop.png');
 }
 
-#board .column .WHITE_KNIGHT {
+.WHITE_KNIGHT {
     background: url('../images/wKnight.png');
 }
 
-#board .column .WHITE_PAWN {
+.WHITE_PAWN {
     background: url('../images/wPawn.png');
 }
 
 
-#board .column .BLACK_KING {
+.BLACK_KING {
     background: url('../images/bKing.png');
 }
 
-#board .column .BLACK_QUEEN {
+.BLACK_QUEEN {
     background: url('../images/bQueen.png');
 }
 
-#board .column .BLACK_ROOK {
+.BLACK_ROOK {
     background: url('../images/bRook.png');
 }
 
-#board .column .BLACK_BISHOP {
+.BLACK_BISHOP {
     background: url('../images/bBishop.png');
 }
 
-#board .column .BLACK_KNIGHT {
+.BLACK_KNIGHT {
     background: url('../images/bKnight.png');
 }
 
-#board .column .BLACK_PAWN {
+.BLACK_PAWN {
     background: url('../images/bPawn.png');
 }
+/*removed the column and board classes from all the chess pieces*/
 
 #board .column .EMPTY {
     background: none;

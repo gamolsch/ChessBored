@@ -120,12 +120,28 @@ $(function(){ //"document ready"
     //conditional logic determining whether a piece dies (if so send and store piece information, remove piece png from dom)
     //determine possibilities (and check to see if king is one of them - if so, that is a check)
     //if king check = king is only active piece on next turn 
-    //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
+    //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go)
+
+    var the_piece_in_div = $(this).find('div') 
+    var piece_class_names = the_piece_in_div.attr("class");
+    if (piece_class_names != undefined){
+      var piece_name = piece_class_names.split(" ")[1];
+      if (piece_name.match(/WHITE_.*/)){
+        $("#white-dead").append(the_piece_in_div);
+        $("#white-dead div").css("height", "50px");
+        $("#white-dead div").css("width", "50px");
+      }
+      else if (piece_name.match(/BLACK_.*/)){
+        $("#black-dead").append(the_piece_in_div);
+        $("#black-dead div").css("height", "50px");
+        $("#black-dead div").css("width", "50px");
+        // $("#black-dead").children('div').css("height" "50px")
+      } 
+    }
+
+
+    $(this).empty();
     var $piece = ui.draggable
-    console.log("THIS IS WHAT WE ARE DRAGGING");
-    console.log($piece);
-    console.log("THIS IS WHAT WE ARE APPENDING TO");
-    console.log($(this));
     $piece.appendTo($(this));
     switch (activeplayer){
       case "white":
