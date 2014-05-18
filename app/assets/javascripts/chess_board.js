@@ -70,8 +70,6 @@ function getsquareName(squareValue){
 
 var activeplayer = "white"
 
-
-
 function drawBoard(board){
     var num = 1;
     var str = '';
@@ -107,6 +105,7 @@ $(function(){ //"document ready"
 
   $(".piece").draggable({
     revert: true,
+    stack: ".piece", 
     start: function(e, ui) {
       var current_piece = ui.helper[0];  
     }
@@ -123,7 +122,12 @@ $(function(){ //"document ready"
     //if king check = king is only active piece on next turn 
     //get all possibilities for all pieces of opposing color (these mark the places where the king cannot go) 
     var $piece = ui.draggable
+    console.log("THIS IS WHAT WE ARE DRAGGING");
+    console.log($piece);
+    console.log("THIS IS WHAT WE ARE APPENDING TO");
+    console.log($(this));
     $piece.appendTo($(this));
+
      switch (activeplayer){
       case "white":
         activeplayer = "black"
@@ -150,13 +154,60 @@ $(function(){ //"document ready"
       data: parse_piece_information($(this)[0]),
       complete: {},
       success: function(response){
+        // console.log(".piece");
+        // console.log("this is active player");
+        // console.log(activeplayer); //we are able to get the active player
         var array_possible_divs = []
         var array = response[0]
         for(var i = 0; i < array.length; i++){
-          console.log(array[i]);
-          $("#" + array[i]).addClass("possibleLocations");
-          array_possible_divs.push($("#" + array[i]));
-          $("#" + array[i]).droppable("enable"); 
+          // console.log("this is containing div");
+          // console.log($("#" + array[i]));
+          // console.log("this should be the piece within the div");          
+          // console.log(($("#" + array[i])).find('div'));
+          // var the_piece_in_div = $("#" + array[i]).find('div')
+          // var piece_class_names = the_piece_in_div.attr("class");
+          // if (piece_class_names != undefined){
+          //   var piece_name = piece_class_names.split(" ")[1];
+          //   // console.log("should return boolean");
+          //   if (piece_name.match(/BLACK_.*/)){
+          //     console.log("MATCHES BLACK PIECES"); 
+          //   }
+          // }
+          if (activeplayer === "white"){
+            console.log(activeplayer);
+            // console.log("active player is white");
+            var the_piece_in_div = $("#" + array[i]).find('div')
+            var piece_class_names = the_piece_in_div.attr("class");  
+            if (piece_class_names != undefined){
+              var piece_name = piece_class_names.split(" ")[1];
+            // console.log("should return boolean");
+              if (piece_name.match(/BLACK_.*/)){
+                // console.log("MATCHES BLACK PIECES");
+                $("#" + array[i]).addClass("possibleLocations"); 
+                $("#" + array[i]).droppable("enable"); 
+              }
+            }
+            
+          }
+          if (activeplayer === "black"){
+            console.log(activeplayer);
+            var the_piece_in_div = $("#" + array[i]).find('div')
+            var piece_class_names = the_piece_in_div.attr("class");
+            if (piece_class_names != undefined){
+              var piece_name = piece_class_names.split(" ")[1];
+            // console.log("should return boolean");
+              if (piece_name.match(/WHITE_.*/)){
+                // console.log("MATCHES WHITE PIECES");
+                $("#" + array[i]).addClass("possibleLocations"); 
+                $("#" + array[i]).droppable("enable"); 
+              }
+            }
+          }
+          if ( $("#" + array[i]).children().length == 0 ) { //or if the div containes a piece of the opposite color
+            $("#" + array[i]).addClass("possibleLocations");
+            array_possible_divs.push($("#" + array[i]));
+            $("#" + array[i]).droppable("enable"); 
+          }
         }
       }
     })
