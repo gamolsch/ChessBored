@@ -338,14 +338,14 @@ $(function(){ //"document ready"
               if ( i == up_stop && (activeplayer === "white" && current_piece.piece_color === activeplayer) ){
                 var blocking_piece = $("#" + up_stop).find('div')[0];
                 var blocking_piece = blocking_piece.className.split(" ")[1]
-                if (blocking_piece.match(/BLACK_.*/ && current_piece.piece_type != "pawn") ){
+                if (blocking_piece.match(/BLACK_.*/ ) ){
                   i+=8
                 }
               }
               if ( i == up_stop && (activeplayer === "black" && current_piece.piece_color === activeplayer) ){
                 var blocking_piece = $("#" + up_stop).find('div')[0];
                 var blocking_piece = blocking_piece.className.split(" ")[1]
-                if (blocking_piece.match(/WHITE_.*/ && current_piece.piece_type != "pawn") ){
+                if (blocking_piece.match(/WHITE_.*/ ) ){
                   i+=8
                 }
               }
@@ -359,14 +359,14 @@ $(function(){ //"document ready"
               if ( i == down_stop && (activeplayer === "white" && current_piece.piece_color === activeplayer) ){
                 var blocking_piece = $("#" + down_stop).find('div')[0];
                 var blocking_piece = blocking_piece.className.split(" ")[1]
-                if (blocking_piece.match(/BLACK_.*/ && current_piece.piece_type != "pawn") ){
+                if (blocking_piece.match(/BLACK_.*/ ) ){
                   i-=8
                 }
               }
               if ( i == down_stop && (activeplayer === "black" && current_piece.piece_color === activeplayer) ){
                 var blocking_piece = $("#" + down_stop).find('div')[0];
                 var blocking_piece = blocking_piece.className.split(" ")[1]
-                if (blocking_piece.match(/WHITE_.*/ && current_piece.piece_type != "pawn") ){
+                if (blocking_piece.match(/WHITE_.*/ ) ){
                   i-=8
                 }
               }
@@ -466,6 +466,10 @@ $(function(){ //"document ready"
                 $("#" + (location - 16) ).removeClass("possibleLocations");
                 $("#" + (location - 16) ).droppable("disable");
               }
+              if ($("#" + (location-8) ) .children().length != 0) {
+                $("#" + (location - 8) ).removeClass("possibleLocations");
+                $("#" + (location - 8) ).droppable("disable");
+              };
               var possible_attacks = [(location - 9), (location-7)]
             }
             if (activeplayer == "black") {
@@ -473,6 +477,10 @@ $(function(){ //"document ready"
                 $("#" + (location + 16) ).removeClass("possibleLocations");
                 $("#" + (location + 16) ).droppable("disable");
               }
+              if ($("#" + (location + 8) ) .children().length != 0) {
+                $("#" + (location + 8) ).removeClass("possibleLocations");
+                $("#" + (location + 8) ).droppable("disable");
+              };
               var possible_attacks = [(location + 9), (location + 7)]
             }
             for (var i = 0; i < possible_attacks.length; i++) {
