@@ -4,24 +4,13 @@ class Player < ActiveRecord::Base
     has_many :playergames
     has_many :games, through: :playergames
 
-  include BCrypt
-
-  def password
-    @password ||= Password.new(password_hash)
-  end
-
-  def password=(new_password)
-    @password = Password.create(new_password)
-    self.password_hash = @password
-  end
-
   def self.authenticate(login_info)
     this_user = User.find_by_email(login_info[:email])
     if this_user && this_user.password == login_info[:password_hash]
       return this_user.id
     end
   end
-  
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider

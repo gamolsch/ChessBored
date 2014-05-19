@@ -70,7 +70,7 @@ function getsquareName(squareValue){
 
 var activeplayer = "white"
 
-function drawBoard(board){
+var drawBoard = function (){
     var num = 1;
     var str = '';
     //building rows
@@ -88,6 +88,13 @@ function drawBoard(board){
   $('#board').append(str);
 };
 
+var ready = function() {
+    drawBoard();
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
 function parse_piece_information(current_piece){
     class_array = current_piece.className.split(" ")[1];
     var piece_location = current_piece.parentNode.id;
@@ -97,9 +104,7 @@ function parse_piece_information(current_piece){
     return {piece_location: piece_location, piece_color: piece_color, piece_type: piece_type}
 }
 
-$(function(){
-  drawBoard(board)
-})
+
 
 $(function(){ //"document ready"
 
